@@ -18,17 +18,22 @@
 #----------------------------------------------------------------------------------------------------------
 import mysql.connector as mcon
 
+credential={"host":"localhost","user":"root","passwd":"","database":"phonebook"}
+#used dictionary for string credential of databse for further use in code
+
+
 class phoneBook():
     flag=0 #flag used to connection is Established or not
     def __init__(self):
 
         #Constructor used to Create Databse And Tables Using MySql.
         try:
-            myconn=mcon.connect(host="localhost",user="root",passwd="")#connrct to sql server
+            myconn=mcon.connect(host=credential["host"],user=credential["user"],passwd=credential["passwd"])#connrct to sql server
             cur=myconn.cursor() #cursor object for executing sql query
             chkdb="SHOW DATABASES LIKE 'phonebook'" #used to check db is present or not
             cur.execute(chkdb)
             data=cur.fetchone()
+            print(data)
             if data==None:
                 try:
                     #query for creting database
@@ -45,7 +50,7 @@ class phoneBook():
                 #query for creating table
 
                 try:
-                    myconn=mcon.connect(host="localhost",user="root",passwd="",database="phonebook")#connrct to sql server
+                    myconn=mcon.connect(host=credential["host"],user=credential["user"],passwd=credential["passwd"],database=credential["database"])#connrct to sql server
                     cur=myconn.cursor() #cursor object for executing sql query
                     
                     tbl_query='''CREATE TABLE myphonebook(id int AUTO_INCREMENT PRIMARY KEY,
@@ -69,7 +74,7 @@ class phoneBook():
 
     def addFriend(self):
         try:
-            myconn=mcon.connect(host="localhost",user="root",passwd="",database="phonebook")#connrct to sql server
+            myconn=mcon.connect(host=credential["host"],user=credential["user"],passwd=credential["passwd"],database=credential["database"])#connrct to sql server
             cur=myconn.cursor() #cursor object for executing sql query
         
             
@@ -139,7 +144,7 @@ class phoneBook():
             print("\n=========================================================")
 
     def searchFriendData(self):
-        myconn=mcon.connect(host="localhost",user="root",passwd="",database="phonebook")#connrct to sql server
+        myconn=mcon.connect(host=credential["host"],user=credential["user"],passwd=credential["passwd"],database=credential["database"])#connrct to sql server
         cur=myconn.cursor() #cursor object for executing sql query
         print("======================Search Friend======================")
         fd_name=input("Enter Name : ")
@@ -160,7 +165,7 @@ class phoneBook():
             
     def showAllFriends(self):
         try:
-            myconn=mcon.connect(host="localhost",user="root",passwd="",database="phonebook")#connrct to sql server
+            myconn=mcon.connect(host=credential["host"],user=credential["user"],passwd=credential["passwd"],database=credential["database"])#connrct to sql server
             cur=myconn.cursor() #cursor object for executing sql query
             print("======================All Friends========================\n")
             sel="SELECT * FROM myphonebook"
@@ -180,7 +185,7 @@ class phoneBook():
         
 
     def updateFriendData(self):
-        myconn=mcon.connect(host="localhost",user="root",passwd="",database="phonebook")#connrct to sql server
+        myconn=mcon.connect(host=credential["host"],user=credential["user"],passwd=credential["passwd"],database=credential["database"])#connrct to sql server
         cur=myconn.cursor() #cursor object for executing sql query
         print("====================Update Friend Data===================")
         fd_id=int(input("Enter Id : "))
@@ -240,7 +245,7 @@ class phoneBook():
             
         
     def delFriendData(self):
-        myconn=mcon.connect(host="localhost",user="root",passwd="",database="phonebook")#connrct to sql server
+        myconn=mcon.connect(host=credential["host"],user=credential["user"],passwd=credential["passwd"],database=credential["database"])#connrct to sql server
         cur=myconn.cursor() #cursor object for executing sql query
         print("====================Delete Friend Data===================")
         fd_id=int(input("Enter Id : "))
